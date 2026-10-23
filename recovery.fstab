@@ -1,10 +1,9 @@
-# mount point	fstype    device    	[device2]
-
-/boot       mtd         boot
-/cache      yaffs2      cache
-/data       yaffs2      userdata
-/misc       mtd         misc
-/recovery   mtd         recovery
-/sdcard     vfat        /dev/block/mmcblk0p1        /dev/block/mmcblk0
-/system     yaffs2      system
-/sd-ext     ext4        /dev/block/mmcblk0p2
+# CM13 fs_mgr format: block-device mount-point filesystem mount-flags fs_mgr-flags
+# Evidence: stockimages/recovery.bin recovery fstab, stock boot fstab.m1 and GPT.
+# Named bootdevice paths are used by the stock cmdline/ueventd configuration.
+/dev/block/bootdevice/by-name/boot      /boot      emmc  defaults defaults
+/dev/block/bootdevice/by-name/recovery  /recovery  emmc  defaults defaults
+/dev/block/bootdevice/by-name/misc      /misc      emmc  defaults defaults
+/dev/block/bootdevice/by-name/system    /system    ext4  defaults wait
+/dev/block/bootdevice/by-name/cache     /cache     ext4  defaults wait
+/dev/block/bootdevice/by-name/userdata  /data      ext4  defaults wait,encryptable=/dev/block/bootdevice/by-name/encrypt
