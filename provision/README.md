@@ -16,3 +16,7 @@ can introduce its own wizard; that is outside this ROM package selection.
 Future incremental packaging must remove stale output copies of overridden
 wizard APKs, and assert target-files contain K7Provision but no SetupWizard or
 CyanogenSetupWizard. Compile and package checks precede owner cold-boot testing.
+
+Correction: keep original proguard.flags and its Android.mk reference. Without
+them Jack strips DefaultActivity and produces a 140-byte empty DEX. Package
+audits must verify the class definition/onCreate, not just the manifest.

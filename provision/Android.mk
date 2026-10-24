@@ -7,6 +7,7 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 LOCAL_PACKAGE_NAME := K7Provision
 LOCAL_CERTIFICATE := platform
+LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 LOCAL_OVERRIDES_PACKAGES := Provision CyanogenSetupWizard SetupWizard
 include $(BUILD_PACKAGE)
 endif
