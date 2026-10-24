@@ -1,22 +1,27 @@
 # K7 first boot without SetupWizard
 
-Owner requests direct launcher access because microG registration is disabled
-by default and must be enabled before account login; SetupWizard blocks access
-to those settings. K7Provision replaces Provision/CyanogenSetupWizard/SetupWizard
-only in the focused K7 radio products, using standard package override rules.
-The manifest and DefaultActivity.java are exact copies of CM13/AOSP Provision.
-On first HOME launch it marks DEVICE_PROVISIONED and USER_SETUP_COMPLETE,
-disables its own activity, then finishes so the launcher can open. It does not
-configure accounts, enable microG registration or grant extra app permissions.
+**Boot-tested, 2026-10-24:** the owner reaches the launcher immediately and
+Recents works. ADB confirms `DEVICE_PROVISIONED=1`, `USER_SETUP_COMPLETE=1` and
+that `DefaultActivity` disables itself after running.
 
-No global vendor/cm configuration or framework patch is required. Keep managed
-work-profile provisioning separate. A later external GApps/microG installer
-can introduce its own wizard; that is outside this ROM package selection.
+`K7Provision` overrides Provision/CyanogenSetupWizard/SetupWizard only in the
+focused K7 radio products. The manifest, Java activity and ProGuard keep rule
+come from CM13/AOSP Provision. It sets the normal setup-complete flags, disables
+its own activity and finishes. microG/account configuration happens afterward.
+No framework or global CM package-list modification is required.
 
-Future incremental packaging must remove stale output copies of overridden
-wizard APKs, and assert target-files contain K7Provision but no SetupWizard or
-CyanogenSetupWizard. Compile and package checks precede owner cold-boot testing.
+## Regression checks
 
-Correction: keep original proguard.flags and its Android.mk reference. Without
-them Jack strips DefaultActivity and produces a 140-byte empty DEX. Package
-audits must verify the class definition/onCreate, not just the manifest.
+Keep `proguard.flags` and its `LOCAL_PROGUARD_FLAG_FILES` reference. Omitting
+them produced a 140-byte empty DEX and a `DefaultActivity` launch loop. The fixed
+APK has the actual class/onCreate and is byte-identical to original AOSP
+Provision. Package checks must inspect DEX class definitions, not just manifests.
+
+Incremental packaging must remove verified stale copies of overridden setup
+APKs and assert that only K7Provision remains. External installers can add their
+own wizard independently. Neither this activity nor CM13's SetupWizard reads
+`ro.setupwizard.mode`; that property alone does not implement this path.
+
+This CM13 tree rejects platform-signed APK updates under `/data`, so installing
+an app update was not a viable test/recovery path; the corrected ROM was flashed
+and first boot verified.
