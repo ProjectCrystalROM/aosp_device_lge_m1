@@ -55,3 +55,6 @@ PRODUCT_PACKAGES += K7Provision
 
 # Upstream microG Services and Companion, with original release signatures.
 PRODUCT_PACKAGES += GmsCore Phonesky
+
+# Complete the Services Framework self-check with the upstream proxy.
+PRODUCT_PACKAGES += GsfProxy
