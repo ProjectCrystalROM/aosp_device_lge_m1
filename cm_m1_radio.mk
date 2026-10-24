@@ -49,3 +49,6 @@ PRODUCT_COPY_FILES += \
     device/lge/m1-common/audio/audio_policy.conf:system/etc/audio_policy.conf \
     device/lge/m1-common/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
     device/lge/m1-common/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml
+
+# Reach the launcher before microG registration/account setup.
+PRODUCT_PACKAGES += K7Provision
