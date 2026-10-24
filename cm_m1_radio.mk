@@ -4,6 +4,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 $(call inherit-product, device/lge/m1-common/boot.mk)
+$(call inherit-product, device/lge/m1-common/wireless.mk)
 $(call inherit-product, device/lge/m1-common/ril/radio.mk)
 $(call inherit-product, vendor/lge/m1/radio-stock/m1-radio-vendor.mk)
 
@@ -33,15 +34,15 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default
 
-# Keep the earlier software-codec and camera-stub inputs explicitly,
-# without inheriting emulator HALs, properties, or goldfish/ranchu ramdisks.
+# K7 recording profiles and the existing Qualcomm AVC encoder; keep software
+# playback includes and avoid inheriting unrelated legacy HALs/services.
 # The primary audio HAL and routing now use the K7/CAF selection above.
 PRODUCT_COPY_FILES += \
-    device/generic/goldfish/camera/media_profiles.xml:system/etc/media_profiles.xml \
+    device/lge/m1-common/configs/media_profiles.xml:system/etc/media_profiles.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-    device/generic/goldfish/camera/media_codecs.xml:system/etc/media_codecs.xml \
+    device/lge/m1-common/configs/media_codecs_recording.xml:system/etc/media_codecs.xml \
     device/lge/m1-common/audio/audio_policy.conf:system/etc/audio_policy.conf \
     device/lge/m1-common/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
     device/lge/m1-common/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml
