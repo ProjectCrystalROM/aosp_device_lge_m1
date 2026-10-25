@@ -23,7 +23,10 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
 
+    <uses-permission android:name="cyanogenmod.permission.WRITE_SECURE_SETTINGS" />
+
     <application>
+        <uses-library android:name="org.cyanogenmod.platform" android:required="true" />
         <activity android:name="DefaultActivity"
                 android:excludeFromRecents="true">
             <intent-filter android:priority="1">
