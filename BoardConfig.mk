@@ -15,9 +15,10 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 # following the initial TWRP-based repair. This is CM/fs_mgr syntax.
 TARGET_RECOVERY_FSTAB := device/lge/m1/recovery.fstab
 
-# Explicit experimental product; the normal cm_m1 boot profile stays separate.
-ifneq ($(filter cm_m1_radio cm_m1_radio_noselinux,$(TARGET_PRODUCT)),)
+# Qualified hardware integration for the standard product and legacy profiles.
+ifneq ($(filter cm_m1 cm_m1_radio cm_m1_radio_noselinux,$(TARGET_PRODUCT)),)
 include device/lge/m1-common/ril/BoardConfigRadio.mk
+include device/lge/m1-common/BoardConfigWireless.mk
 # Existing MSM8909 display fragment uses the C2D path with the retained GPU blobs.
 TARGET_USES_C2D_COMPOSITION := true
 USE_OPENGL_RENDERER := true
@@ -27,7 +28,15 @@ BOARD_LIGHTS_VARIANT := qpnp
 include device/lge/msm8909-common/board/qcom-audio.mk
 endif
 
-# Opt-in diagnostics only; never selected by cm_m1 or cm_m1_radio.
+# Standard product is always enforcing.
+ifeq ($(TARGET_PRODUCT),cm_m1)
+BOARD_KERNEL_CMDLINE += security=selinux enforcing=1 androidboot.selinux=enforcing
+TARGET_KERNEL_SOURCE := kernel/lge/m1
+TARGET_KERNEL_CONFIG := m1_mpcs_us-perf_defconfig
+TARGET_PREBUILT_KERNEL :=
+endif
+
+# Legacy diagnostic selectors.
 ifeq ($(TARGET_PRODUCT),cm_m1_radio_noselinux)
 ifeq ($(K7_SELINUX_PERMISSIVE),true)
 include device/lge/m1-common/ril/BoardConfigPermissive.mk

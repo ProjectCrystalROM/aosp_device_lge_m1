@@ -1,4 +1,4 @@
-# Experimental radio integration product. The boot-only cm_m1 remains separate.
+# Shared hardware-qualified K7 integration; cm.mk exposes standard cm_m1.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
@@ -17,7 +17,7 @@ PRODUCT_MODEL := m1
 PRODUCT_MANUFACTURER := lge
 
 # The K7 has no physical navigation keys. Keep this radio/diagnostic fix
-# isolated from the baseline cm_m1 product.
+# retained for the standard K7 product and legacy diagnostics.
 PRODUCT_PACKAGE_OVERLAYS += device/lge/m1/overlay-radio
 
 # Experimental display bring-up: pinned CAF modules use the exported K7 UAPI.
@@ -53,6 +53,9 @@ PRODUCT_COPY_FILES += \
 # Stock K7 device-mode accessory capability starts the framework USB service.
 # This is not USB host/OTG support.
 PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
+
+# Start the built-in Backup Manager used by Settings Backup & reset.
+PRODUCT_COPY_FILES += frameworks/native/data/etc/android.software.backup.xml:system/etc/permissions/android.software.backup.xml
 
 # Reach the launcher before microG registration/account setup.
 PRODUCT_PACKAGES += K7Provision
