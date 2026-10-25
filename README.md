@@ -60,15 +60,17 @@ residency. Tap focus responding does not establish exhaustive autofocus quality.
 
 These are component repositories, not a standalone manifest. The qualified build
 uses the existing CM13 checkout and Java 7 / Trusty environment, reviewed platform
-changes and pinned APK staging. Apply the microG framework patch separately.
+changes and pinned APK staging. Apply the tested microG framework patch supplied in
+`platform/frameworks-base-microg.patch` in the common tree; its exact base and
+commit are documented in `platform/README.md`.
 The Bluetooth address handoff needs the matching `system/bt` change supplied as
 `bluetooth/system-bt-address-handoff.patch` in the common repository. Stage vendor
 APKs using `microg/stage.py`; do not re-sign them. Select `lunch cm_m1-userdebug`.
 Legacy `cm_m1_radio*` profiles remain diagnostic history, not the current product.
 
-## Qualified checkpoint
+## Preserved GPS rollback
 
-Latest owner-flashed GPS build, with prior USB/wireless/camera fixes included:
+Owner-qualified GPS build, with prior USB/wireless/camera fixes included:
 
 `cm-13.0-20261025-UNOFFICIAL-m1.zip`
 
@@ -89,13 +91,20 @@ RIL/data services, messaging, SIM toolkit and cell broadcasts remain selected.
 The small screen's density, navigation and other hardware settings are retained.
 Legacy diagnostic product selections are unchanged.
 
-This is a future-build customization, not part of the qualified GPS ZIP above.
+This customization is included in the latest owner-booted build below; the
+earlier GPS ZIP above remains a preserved phone-profile rollback.
 The focused package-graph/resource checks verify the selection; SMS delivery
 still needs an active SIM. When reusing output staging, remove only the
 identity-verified stale `priv-app/Dialer/Dialer.apk` before system packaging;
 the workspace build helper handles this for the normal product. Merely removing
 Dialer from PRODUCT_PACKAGES does not clean an old installed APK automatically.
 
-Behavior-only candidate built on 2026-10-25; normal phone wording retained.
-SHA-256: `aabcf34c5f20ccf92683232d6134177b75a468f3df163710bef92a18a40bf805`. Boot acceptance is pending; the GPS checkpoint above
-remains the last owner-qualified ROM.
+Latest behavior-only build, 2026-10-25; normal phone wording retained.
+SHA-256: `aabcf34c5f20ccf92683232d6134177b75a468f3df163710bef92a18a40bf805`. Owner confirms boot after reoptimization and no regressions in a quick check.
+A new overnight check with Wi-Fi, Bluetooth and cellular registration enabled
+passed; GPS and photos with/without flash work after wake. Battery 97% to 78%
+over approximately 04:41–12:00 (7h19m), about 2.6 percentage points/hour.
+This is an approximate idle observation, not active-use endurance validation.
+Active-SIM data and active-use endurance remain pending; deeper review will
+follow when convenient. Inactive-SIM LTE/Home registration was confirmed on
+the earlier GPS build, not a substitute for active-data testing.
