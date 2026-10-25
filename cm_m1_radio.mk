@@ -50,6 +50,10 @@ PRODUCT_COPY_FILES += \
     device/lge/m1-common/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
     device/lge/m1-common/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml
 
+# Stock K7 device-mode accessory capability starts the framework USB service.
+# This is not USB host/OTG support.
+PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
+
 # Reach the launcher before microG registration/account setup.
 PRODUCT_PACKAGES += K7Provision
 
