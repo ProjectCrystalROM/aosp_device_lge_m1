@@ -80,3 +80,18 @@ target-files, APK signatures, signed OTA and actual system payload preservation
 checks pass. Runtime claims above come from device testing, not static checks.
 Workspace `audit/` evidence and immutable rollback ZIPs are kept outside this
 repository. Raw location logs and host crash dumps are private evidence.
+
+## Future-build owner preference: cellular tablet
+
+The standard `cm_m1` source now selects tablet characteristics with voice
+capability disabled and SMS capability enabled. Dialer is omitted; cellular
+RIL/data services, messaging, SIM toolkit and cell broadcasts remain selected.
+The small screen's density, navigation and other hardware settings are retained.
+Legacy diagnostic product selections are unchanged.
+
+This is a future-build customization, not part of the qualified GPS ZIP above.
+The focused package-graph/resource checks verify the selection; SMS delivery
+still needs an active SIM. When reusing output staging, remove only the
+identity-verified stale `priv-app/Dialer/Dialer.apk` before system packaging;
+the workspace build helper handles this for the normal product. Merely removing
+Dialer from PRODUCT_PACKAGES does not clean an old installed APK automatically.

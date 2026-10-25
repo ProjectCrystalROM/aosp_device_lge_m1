@@ -1,6 +1,10 @@
 # Shared hardware-qualified K7 integration; cm.mk exposes standard cm_m1.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
+ifeq ($(TARGET_PRODUCT),cm_m1)
+$(call inherit-product, device/lge/m1/cellular_tablet.mk)
+else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+endif
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 $(call inherit-product, device/lge/m1-common/boot.mk)

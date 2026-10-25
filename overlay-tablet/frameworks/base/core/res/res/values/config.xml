@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cellular tablet: retain SMS/data while removing voice-call affordances. -->
+    <bool name="config_voice_capable">false</bool>
+    <bool name="config_sms_capable">true</bool>
+</resources>
