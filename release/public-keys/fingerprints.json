@@ -1,0 +1,21 @@
+{
+  "subject": "/CN=Peridot Release Signing Authority/O=Homeworld Device Engineering/OU=Crystal Gem ROM Division/L=Beach City/ST=Texas/C=US/emailAddress=alexis@estherose.online",
+  "keys": {
+    "releasekey": {
+      "certificate_sha256": "65ecebb7f44b6c31b8c0e6a094087de02a180ecc408ec2f31c1b72f1805f45e7",
+      "rsa_bits": 2048
+    },
+    "platform": {
+      "certificate_sha256": "c8f34fc9500f120961e1ebe380615076c74e55ea68dbe46b02b98112d56f6b5f",
+      "rsa_bits": 2048
+    },
+    "shared": {
+      "certificate_sha256": "dd7a642ece1a7f850f89f0230bdb1abd9f2d68dbd026e5ccb39d3259dcab7d63",
+      "rsa_bits": 2048
+    },
+    "media": {
+      "certificate_sha256": "de55d897d1bf2e48a6a443e46ffe6616de8a3b1d28b007be86788de194b60f2b",
+      "rsa_bits": 2048
+    }
+  }
+}

@@ -110,3 +110,12 @@ This is an approximate idle observation, not active-use endurance validation.
 Active-SIM data and active-use endurance remain pending; deeper review will
 follow when convenient. Inactive-SIM LTE/Home registration was confirmed on
 the earlier GPS build, not a substitute for active-data testing.
+
+## Peridot release signing
+
+A separately signed release of the same qualified build is available in the
+development workspace. Public certificate identity, fingerprints, key mapping
+and first-install requirements: [release signing notes](release/README.md).
+Release ZIP SHA-256: `cabd413563e4f8445fd0676903b58714c91855908eacebdbb7959f7577d91a53`.
+Signing/payload audits pass; first clean install with release keys is pending.
+The existing test-key build remains the hardware-qualified source baseline.

@@ -107,3 +107,15 @@ remain available as rollback artifacts in the development workspace.
 Hardware claims come from owner testing and local runtime evidence. Image,
 module/linkage, target-files, signature and actual signed-payload audits support
 packaging integrity; static checks alone are not hardware qualification.
+
+## 2026-10-25 — Peridot release signing
+
+- Added distinct release/platform/shared/media signing keys under the Peridot
+  Release Signing Authority identity; published public certificates only.
+- Re-signed the qualified build and changed OTA/recovery trust to Peridot.
+- Kept upstream microG and WebView APKs byte-identical and preserved application
+  code, native components, kernel, policy and hardware configuration.
+- Release signature and exact payload audits pass. Initial clean install after
+  switching away from test keys remains pending.
+
+Signed ZIP SHA-256: `cabd413563e4f8445fd0676903b58714c91855908eacebdbb7959f7577d91a53`. See [signing notes](release/README.md).
