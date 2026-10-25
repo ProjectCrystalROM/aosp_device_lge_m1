@@ -4,6 +4,8 @@
 MetroPCS MS330, with SELinux enforcing.** Android 6.0.1; other K7 variants have
 not been qualified. The former build-failure and SELinux-disabled status is obsolete.
 
+Development history: [dated changelog](CHANGELOG.md).
+
 ## Hardware status
 
 ✅ Working · ⏳ Awaiting testing · ➖ Outside scope / unsupported
