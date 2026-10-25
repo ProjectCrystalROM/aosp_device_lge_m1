@@ -5,5 +5,6 @@
 PRODUCT_PROPERTY_OVERRIDES += keyguard.no_require_sim=true
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 PRODUCT_PACKAGES += CarrierConfig CallLogBackup InCallUI Mms rild messaging
-PRODUCT_CHARACTERISTICS := tablet
+# Retain normal phone wording/layout; only voice/SMS capabilities change.
+PRODUCT_CHARACTERISTICS := default
 PRODUCT_PACKAGE_OVERLAYS += device/lge/m1/overlay-tablet

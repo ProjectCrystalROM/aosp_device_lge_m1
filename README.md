@@ -83,7 +83,7 @@ repository. Raw location logs and host crash dumps are private evidence.
 
 ## Future-build owner preference: cellular tablet
 
-The standard `cm_m1` source now selects tablet characteristics with voice
+The standard `cm_m1` source keeps normal phone wording/layout, with voice
 capability disabled and SMS capability enabled. Dialer is omitted; cellular
 RIL/data services, messaging, SIM toolkit and cell broadcasts remain selected.
 The small screen's density, navigation and other hardware settings are retained.
@@ -95,3 +95,7 @@ still needs an active SIM. When reusing output staging, remove only the
 identity-verified stale `priv-app/Dialer/Dialer.apk` before system packaging;
 the workspace build helper handles this for the normal product. Merely removing
 Dialer from PRODUCT_PACKAGES does not clean an old installed APK automatically.
+
+Behavior-only candidate built on 2026-10-25; normal phone wording retained.
+SHA-256: `aabcf34c5f20ccf92683232d6134177b75a468f3df163710bef92a18a40bf805`. Boot acceptance is pending; the GPS checkpoint above
+remains the last owner-qualified ROM.
