@@ -29,7 +29,11 @@ endif
 
 # Opt-in diagnostics only; never selected by cm_m1 or cm_m1_radio.
 ifeq ($(TARGET_PRODUCT),cm_m1_radio_noselinux)
+ifeq ($(K7_SELINUX_PERMISSIVE),true)
+include device/lge/m1-common/ril/BoardConfigPermissive.mk
+else
 include device/lge/m1-common/ril/BoardConfigNoSELinux.mk
+endif
 # Build the matching LGMS330 kernel only for the diagnostic product.
 # Its stock DT image and no-SELinux boot arguments remain separately selected.
 TARGET_KERNEL_SOURCE := kernel/lge/m1
