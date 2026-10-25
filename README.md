@@ -117,5 +117,7 @@ A separately signed release of the same qualified build is available in the
 development workspace. Public certificate identity, fingerprints, key mapping
 and first-install requirements: [release signing notes](release/README.md).
 Release ZIP SHA-256: `cabd413563e4f8445fd0676903b58714c91855908eacebdbb7959f7577d91a53`.
-Signing/payload audits pass; first clean install with release keys is pending.
-The existing test-key build remains the hardware-qualified source baseline.
+Signing/payload audits pass. Owner confirms Android boot and hardware checks on
+this signed release. The matching Cyanogen recovery also passes boot, signed-ZIP
+verification and ADB sideload installation in a separate reflash test. Earlier
+test-key builds remain preserved rollback/source-baseline artifacts.

@@ -66,3 +66,17 @@ payload/kernel/DT/policy, release-only recovery trust, geometry, OTA signature
 pinned to releasekey, actual system.new.dat against signed system.img, and
 partition-write scope. Signing is not a substitute for clean-install hardware
 acceptance. Detailed audit and private device evidence stay outside Git.
+
+## Hardware acceptance — confirmed 2026-10-25
+
+Owner confirms Android boot and hardware checks on the Peridot-signed ROM.
+A second flash specifically tested the matching Cyanogen recovery: recovery
+boot, Peridot-signed ZIP verification and ADB sideload installation all pass.
+This supersedes earlier pending-install/boot notes. Active-SIM data/SMS delivery
+and active-use battery endurance remain separate acceptance items.
+
+Matching recovery image SHA-256:
+`71377af424aa3394cd01ad3f35e43a28a610414169befbadf92223a2520660b4`.
+Its actual embedded recovery keys were verified against the Peridot release
+certificate before the hardware test. Rejection of an unrelated signing key
+was not part of the reported test.

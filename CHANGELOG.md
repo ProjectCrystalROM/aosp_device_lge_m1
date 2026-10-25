@@ -115,7 +115,10 @@ packaging integrity; static checks alone are not hardware qualification.
 - Re-signed the qualified build and changed OTA/recovery trust to Peridot.
 - Kept upstream microG and WebView APKs byte-identical and preserved application
   code, native components, kernel, policy and hardware configuration.
-- Release signature and exact payload audits pass. Initial clean install after
-  switching away from test keys remains pending.
+- Release signature and exact payload audits pass. Owner confirms Android boot
+  and hardware checks pass on the Peridot-signed release.
+- Separately hardware-tested the matching Peridot-key Cyanogen recovery:
+  recovery boot, verification of the signed release ZIP, and ADB sideload
+  installation pass. This was a second flash specifically to validate recovery.
 
 Signed ZIP SHA-256: `cabd413563e4f8445fd0676903b58714c91855908eacebdbb7959f7577d91a53`. See [signing notes](release/README.md).
