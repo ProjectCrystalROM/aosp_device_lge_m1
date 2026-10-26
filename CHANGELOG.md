@@ -5,7 +5,8 @@
   fails loading Policy. Offline artifact defines that class; CM13 boot classpath
   omits CM12 android.policy.jar. Kernel versus ramdisk cause remains unisolated.
 - CM recovery is rejected permanently: LG reset prompt acts like stock, performs
-  a reset and attempts the broken OS. Preserve working TWRP as the ONLY recovery.
+  a reset and attempts the broken OS. The same LG entry sequence works correctly
+  with TWRP; the problem is CM recovery interpretation. TWRP is the ONLY recovery.
 - Removed CM recovery-replacement service/trigger from active core init; source
   change is unbuilt. TWRP-only OTA packaging still requires adaptation/audit.
 - Old ROM/recovery artifacts are deprecated evidence, not recommended installs.
