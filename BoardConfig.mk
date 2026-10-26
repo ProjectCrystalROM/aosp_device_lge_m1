@@ -34,7 +34,7 @@ endif
 # Standard product is always enforcing.
 ifeq ($(TARGET_PRODUCT),cm_m1)
 BOARD_KERNEL_CMDLINE += security=selinux enforcing=1 androidboot.selinux=enforcing
-TARGET_KERNEL_SOURCE := kernel/lge/m1
+TARGET_KERNEL_SOURCE := kernel/lge/m1-custom
 TARGET_KERNEL_CONFIG := m1_mpcs_us-perf_defconfig
 TARGET_PREBUILT_KERNEL :=
 endif
@@ -48,10 +48,13 @@ include device/lge/m1-common/ril/BoardConfigNoSELinux.mk
 endif
 # Build the matching LGMS330 kernel only for the diagnostic product.
 # Its stock DT image and no-SELinux boot arguments remain separately selected.
-TARGET_KERNEL_SOURCE := kernel/lge/m1
+TARGET_KERNEL_SOURCE := kernel/lge/m1-custom
 TARGET_KERNEL_CONFIG := m1_mpcs_us-perf_defconfig
 TARGET_PREBUILT_KERNEL :=
 endif
 
 # Custom CM12 core init adds the required rild net_raw group.
 TARGET_PROVIDES_INIT_RC := true
+
+# Build recovery for explicit testing, but never install/restore it from the ROM.
+TARGET_PRESERVE_INSTALLED_RECOVERY := true
