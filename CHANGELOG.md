@@ -1,3 +1,12 @@
+# 2026-10-26 — Controlled hybrid boot experiment prepared
+
+- Prepared exact archived CM13 kernel/DT with CM12 ramdisk and correct CM12
+  boot classpath; only ramdisk edit disables CM recovery replacement for TWRP.
+- Offline component/header/ramdisk audits pass.18 CM12 modules match donor
+  symbol CRCs and vermagic suffixes. No force-load or module replacement.
+- Temporary boot image is untested; no device action performed. Outcome must
+  precede any claim that kernel versus ramdisk failure has been isolated.
+
 # 2026-10-26 — Boot failure; TWRP-only recovery policy
 
 - Owner reports native CM12.1 boot stalls at LG splash/dim display without ADB.
