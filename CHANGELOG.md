@@ -1,3 +1,11 @@
+# 2026-10-26 — Recorded-video playback with audio confirmed
+
+- Gallery revision1 failed because its guard matched an earlier protected block.
+  Revision2 source774b3a12c guards the actual asynchronous title setter. Final
+  APK DEX confirms both null checks; platform signature and code-only change pass.
+- Owner confirms recorded-video playback succeeds, including recorded voice/audio.
+  Candidate metadata and hardware notes updated; other formats remain unqualified.
+
 # 2026-10-26 — First native CM12 home screen and hardware checks
 
 - Owner confirms home screen after UI feature declaration hotfix; Wi-Fi connect
