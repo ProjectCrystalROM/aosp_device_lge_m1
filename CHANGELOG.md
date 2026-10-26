@@ -1,3 +1,20 @@
+# CM12.1 first-build candidate — 2026-10-26
+
+- Android 5.1.1/API22 cm_m1-userdebug builds in Trusty with Java7.
+- Retains qualified K7 kernel fixes, stock DT/partition layout, heap and routing.
+- Uses original K7 peripheral client, camera sensor/JPEG libraries and direct GPS
+  HAL with a device-scoped callback correction; removes the CM13 RIL/GPS shims.
+- Includes source signature reporting, three pinned upstream microG APKs with
+  original signatures and API22 JNI layout, and the ROM's default WebView.
+- Backs three real libc entry points required by bundled Cronet; ARM tests cover
+  checked pread, strerror/errno, fork ordering, DSO cleanup and actual Cronet load.
+- Offline native closure, boot/recovery and kernel-module checks pass.
+- First CM12.1 boot, hardware regression and microG runtime acceptance pending.
+
+Earlier sections below describe the separate CM13 release.
+
+---
+
 # LG K7 MS330 / CM13 development changelog
 
 October 21–25, 2026. These are bring-up milestones, not separately numbered

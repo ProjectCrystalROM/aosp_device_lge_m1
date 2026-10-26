@@ -1,3 +1,21 @@
+# CM12.1 bring-up branch — experimental
+
+This branch targets Android 5.1.1/API22 on the LG K7. It derives from the
+qualified CM13 hardware/configuration baseline but has no CM12 hardware
+acceptance yet. Build product: `cm_m1-userdebug`. Keep the ROM WebView and
+original K7 radio/camera/JPEG/peripheral/GPS libraries where their Lollipop
+interfaces fit. microG APK inputs retain their pinned upstream signatures.
+
+Apply the CM12 platform patches documented in
+`device/lge/m1-common/platform/cm12.1/README.md`; do not apply CM13 framework
+or Bluetooth patches to this tree. Compile with period-correct Trusty/Java7.
+The build launcher and offline audits live in the bring-up workspace tools/.
+
+The existing sections below document the earlier CM13 release, not a qualified
+CM12 build. No flash or migration operation is automatic.
+
+---
+
 # LG K7 MS330 — CyanogenMod 13
 
 **Status: 2026-10-25. The standard `cm_m1-userdebug` product builds and boots on

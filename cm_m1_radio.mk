@@ -31,7 +31,7 @@ PRODUCT_PACKAGES += gralloc.msm8909 hwcomposer.msm8909 copybit.msm8909 memtrack.
 PRODUCT_PACKAGES += lights.msm8909
 
 # Owner-tested standalone WebView; replaces the old webview package.
-PRODUCT_PACKAGES += K7WebView
+PRODUCT_PACKAGES += webview
 
 # The three routing files are byte-identical to the archived stock K7 system.
 PRODUCT_PACKAGES += \

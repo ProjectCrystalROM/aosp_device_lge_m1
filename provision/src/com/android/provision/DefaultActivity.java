@@ -22,7 +22,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
 
-import cyanogenmod.providers.CMSettings;
 
 /**
  * Application that sets the provisioned bit, like SetupWizard does.
@@ -36,10 +35,6 @@ public class DefaultActivity extends Activity {
         // Add a persistent setting to allow other apps to know the device has been provisioned.
         Settings.Global.putInt(getContentResolver(), Settings.Global.DEVICE_PROVISIONED, 1);
         Settings.Secure.putInt(getContentResolver(), Settings.Secure.USER_SETUP_COMPLETE, 1);
-
-        // CM13 WindowManager uses its own setup gate for Home and assist.
-        CMSettings.Secure.putInt(getContentResolver(),
-                CMSettings.Secure.CM_SETUP_WIZARD_COMPLETED, 1);
 
         // remove this activity from the package manager.
         PackageManager pm = getPackageManager();

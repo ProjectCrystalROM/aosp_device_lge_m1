@@ -16,3 +16,19 @@ $(m1_kernel_headers_out)/usr: $(m1_kernel_headers_inputs) $(m1_kernel_headers_so
 	+$(hide) $(MAKE) -C $(PRIVATE_M1_HEADERS_SOURCE) O=$(PRIVATE_M1_HEADERS_OUT) ARCH=arm headers_install
 	$(hide) touch $@
 endif
+
+# Review the fully evaluated product graph before packaging a bring-up image.
+.PHONY: k7-cm12-config
+k7-cm12-config:
+	@mkdir -p $(PRODUCT_OUT)
+	@printf '%s\n' $(PRODUCT_COPY_FILES) > $(PRODUCT_OUT)/k7-product-copies.txt
+	@printf '%s\n' $(sort $(product_MODULES)) > $(PRODUCT_OUT)/k7-product-packages.txt
+	@printf '%s\n' $(sort $(filter-out $(ALL_MODULES),$(product_MODULES))) > $(PRODUCT_OUT)/k7-missing-packages.txt
+
+# Own init.rc as a real module, preserving CM12's platform boot graph.
+include $(CLEAR_VARS)
+LOCAL_MODULE := init.rc
+LOCAL_SRC_FILES := ril/init.m1.core.rc
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
+include $(BUILD_PREBUILT)

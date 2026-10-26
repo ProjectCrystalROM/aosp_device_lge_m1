@@ -8,7 +8,7 @@ include device/lge/m1-common/BoardConfigBoot.mk
 TARGET_KERNEL_SOURCE :=
 TARGET_PREBUILT_KERNEL := device/lge/m1/kernel
 TARGET_KERNEL_ARCH := arm
-USE_CAMERA_STUB := true
+USE_CAMERA_STUB := false
 BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Paths and filesystem types verified against stock boot/recovery and GPT,
@@ -24,6 +24,9 @@ TARGET_USES_C2D_COMPOSITION := true
 USE_OPENGL_RENDERER := true
 # CM's QPNP lights HAL uses the K7 stock LCD backlight sysfs path.
 BOARD_LIGHTS_VARIANT := qpnp
+# Existing CM12 LG Binder export; no radio shim.
+BOARD_NEEDS_LGE_RIL_SYMBOLS := true
+BOARD_GPS_XTRA_THREE_CALLBACKS := true
 # Enable the pinned Qualcomm audio HAL/policy for the experimental products.
 include device/lge/msm8909-common/board/qcom-audio.mk
 endif
@@ -49,3 +52,6 @@ TARGET_KERNEL_SOURCE := kernel/lge/m1
 TARGET_KERNEL_CONFIG := m1_mpcs_us-perf_defconfig
 TARGET_PREBUILT_KERNEL :=
 endif
+
+# Custom CM12 core init adds the required rild net_raw group.
+TARGET_PROVIDES_INIT_RC := true
