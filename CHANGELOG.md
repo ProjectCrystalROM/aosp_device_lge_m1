@@ -1,3 +1,11 @@
+# 2026-10-26 — CM12.1 recovery hardware failure
+
+- Owner marks CM12.1 recovery broken: ADB sideload fails immediately and red
+  error text disappears before it can be read.
+- Current cache logs mix CM13/CM12.1 sessions; diagnosis awaits a fresh log pull.
+- No cause established or repair applied. Offline checks do not qualify runtime.
+- ROM Android boot/hardware/microG acceptance remains unreported.
+
 # CM12.1 first-build candidate — 2026-10-26
 
 - Android 5.1.1/API22 cm_m1-userdebug builds in Trusty with Java7.
