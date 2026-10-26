@@ -1,3 +1,23 @@
+# 2026-10-26 — Native CM12 boot completed; UI feature fix prepared
+
+- Independent custom_kernel_cm12 fork preserves FenomenalMOD reference; only
+  touch/BMS fallbacks ported. Kernel/modules built in Trusty; hardware testing
+  uses native CM12 ramdisk with early ADB and TWRP safeguards.
+- Live evidence identified missing bootdevice aliases. msm8909-common b32b7ba
+  restores TARGET_PLATFORM_DEVICE_BASE; rebuilt init reaches animation/ADB.
+- m1-common d541544/dafbd47 restore Lollipop storage environment/layout/FUSE.
+  Product b485a40 supplies emulated-volume framework overlay. Signed minimal
+  framework hotfix installed by owner; readback matches expected APK hash.
+- sys.boot_completed=1, bootanim stopped; owner confirms sleep/wake. UI still
+  loops: missing camera.flash/app_widgets features suppress torch/appwidget
+  services. m1-common b07db9d fixes declarations; signed one-XML TWRP hotfix
+  and guarded rollback checked, hardware test pending.
+- Latest artifacts: checkpoints/cm12.1/ui-feature-fix-20261026. Continue with
+  storage-layout-fix temporary boot image. No additional phone writes by agent.
+- QMI errors remain, but modem firmware boots and some transactions succeed.
+  tcp_htcp RAM bind is enforcing-denied; proper module deployment remains pending.
+  Full release packaging still blocked until TWRP-only flow is implemented.
+
 # 2026-10-26 — First hybrid unchanged; classpath-only CM13-base probe
 
 - Owner temporary-booted the first hybrid for about90seconds: LG splash/dim
