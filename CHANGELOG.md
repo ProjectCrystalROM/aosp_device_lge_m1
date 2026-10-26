@@ -1,3 +1,15 @@
+# 2026-10-26 — Boot failure; TWRP-only recovery policy
+
+- Owner reports native CM12.1 boot stalls at LG splash/dim display without ADB.
+- Complete CM13 boot image reaches animation/ADB with CM12 system, then Zygote
+  fails loading Policy. Offline artifact defines that class; CM13 boot classpath
+  omits CM12 android.policy.jar. Kernel versus ramdisk cause remains unisolated.
+- CM recovery is rejected permanently: LG reset prompt acts like stock, performs
+  a reset and attempts the broken OS. Preserve working TWRP as the ONLY recovery.
+- Removed CM recovery-replacement service/trigger from active core init; source
+  change is unbuilt. TWRP-only OTA packaging still requires adaptation/audit.
+- Old ROM/recovery artifacts are deprecated evidence, not recommended installs.
+
 # 2026-10-26 — CM12.1 recovery hardware failure
 
 - Owner marks CM12.1 recovery broken: ADB sideload fails immediately and red
