@@ -1,3 +1,16 @@
+# 2026-10-26 — First native CM12 home screen and hardware checks
+
+- Owner confirms home screen after UI feature declaration hotfix; Wi-Fi connect
+  and Google page load, Bluetooth pairing/connection and notification audio,
+  front/rear photo/video capture, sleep/wake, SIM recognition and standard GSM SIM.
+  Existing CSIM issue remains out of scope; active service/data not qualified.
+- Recorded-video Gallery failure is a null ActionBar in MovieActivity title
+  callback. Gallery2 cm12.1 commit41fd9d78d adds the missing guard. Trusty build
+  and Peridot platform APK signature checks pass; only DEX payload changes.
+- Signed app update ready at checkpoints/cm12.1/gallery-video-fix-20261026;
+  agent has not installed it, playback retest pending. Preserve original system
+  APK via normal app update. Full release remains unqualified/TWRP only.
+
 # 2026-10-26 — Native CM12 boot completed; UI feature fix prepared
 
 - Independent custom_kernel_cm12 fork preserves FenomenalMOD reference; only
