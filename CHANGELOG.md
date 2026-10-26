@@ -1,3 +1,15 @@
+# 2026-10-26 — Consolidated full build and separate recovery retest
+
+- Owner requests full CM12.1 build with all fixes and retained no-dialer profile.
+  Product now selects independently forked custom kernel with matching modules.
+- Recovery-preserving build/OTA mode excludes recovery restoration from the ROM
+  while retaining a separate CM recovery image for explicit temporary testing.
+- Native mount/storage fixes, framework overlay, UI feature declarations and
+  Gallery revision2 are built together in a fresh Trusty output directory.
+- Detailed changelog: checkpoints/cm12.1/final-20261026/CHANGELOG.md in workspace.
+  Consolidated artifacts await validation; prior individual hardware results
+  remain documented separately.
+
 # 2026-10-26 — Bluetooth persistence and SIM-change behavior
 
 - Owner confirms Bluetooth persistence across reboots.
