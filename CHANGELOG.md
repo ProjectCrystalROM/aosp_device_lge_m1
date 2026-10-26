@@ -1,3 +1,9 @@
+# 2026-10-26 — Bluetooth persistence and SIM-change behavior
+
+- Owner confirms Bluetooth persistence across reboots.
+- SIM changes require a reboot; SIM hot-swap is not working in this build.
+  Standard GSM SIM detection remains confirmed; CSIM remains out of scope.
+
 # 2026-10-26 — GPS owner validation
 
 - Owner reports CM13-equivalent GPS: GPS Toolbox sees 20 satellites and
