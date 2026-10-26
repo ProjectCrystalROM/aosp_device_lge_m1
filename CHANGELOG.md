@@ -1,3 +1,12 @@
+# 2026-10-26 — First hybrid unchanged; classpath-only CM13-base probe
+
+- Owner temporary-booted the first hybrid for about90seconds: LG splash/dim
+  display, no animation or ADB. No kernel-only resolution demonstrated.
+- Prepared a second probe retaining complete CM13 boot base, correcting only
+  BOOTCLASSPATH for CM12 and disabling CM recovery replacement for TWRP.
+- Exact component/ramdisk/header checks pass. Second probe is not hardware tested.
+  No agent device action, system modification or new recovery image.
+
 # 2026-10-26 — Controlled hybrid boot experiment prepared
 
 - Prepared exact archived CM13 kernel/DT with CM12 ramdisk and correct CM12
