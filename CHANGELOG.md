@@ -6,10 +6,14 @@
   HAL with a device-scoped callback correction; removes the CM13 RIL/GPS shims.
 - Includes source signature reporting, three pinned upstream microG APKs with
   original signatures and API22 JNI layout, and the ROM's default WebView.
-- Backs three real libc entry points required by bundled Cronet; ARM tests cover
+- Backports three real libc entry points required by bundled Cronet; ARM tests cover
   checked pread, strerror/errno, fork ordering, DSO cleanup and actual Cronet load.
 - Offline native closure, boot/recovery and kernel-module checks pass.
 - First CM12.1 boot, hardware regression and microG runtime acceptance pending.
+- Peridot-signed first test ZIP and matching recovery completed; all 81 APK
+  signatures/payloads, actual OTA system blocks and embedded recovery trust pass.
+- Exact artifact hashes and the pre-hardware checklist are recorded in
+  release/CM12.1_FIRST_TEST.md. No hardware acceptance or remote publication yet.
 
 Earlier sections below describe the separate CM13 release.
 
