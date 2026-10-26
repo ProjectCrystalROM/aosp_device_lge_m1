@@ -1,3 +1,8 @@
+# 2026-10-26 — GPS owner validation
+
+- Owner reports CM13-equivalent GPS: GPS Toolbox sees 20 satellites and
+  approximately 6 m reported accuracy. Basic GPS operation is owner-validated.
+
 # 2026-10-26 — Recorded-video playback with audio confirmed
 
 - Gallery revision1 failed because its guard matched an earlier protected block.
