@@ -1,3 +1,19 @@
+# 2026-10-26 — Consolidated package signed and audited
+
+- Fresh full Trusty build completed in 40m40s. Existing Peridot keys reused.
+  All 81 APK signatures/preserved originals, 17 matching kernel modules,
+  Gallery DEX guards, compiled storage/signature resources, image geometry,
+  OTA system block stream and installer partition scope pass offline checks.
+- ROM ZIP preserves installed TWRP; separate rebuilt CM recovery supplied for
+  the owner-requested temporary-boot retest. No phone flashing/reboot performed.
+- Deliverables and detailed changelog/checksums: checkpoints/cm12.1/final-20261026.
+- Activated AT&T SIM now confirms registration on CM12.1 and CM13, but packet
+  data fails on both. Live CM13 shows DSI initialization flag0 and data setup
+  failing to allocate a DSI handle. Failure reproduced after controlled data
+  toggle; initial enabled state restored. Logs saved before any stock restore.
+- CM13-only road GPS test reports changing coordinates and ~3m accuracy with
+  21 satellites displayed; do not attribute this road test to CM12.
+
 # 2026-10-26 — Consolidated full build and separate recovery retest
 
 - Owner requests full CM12.1 build with all fixes and retained no-dialer profile.
