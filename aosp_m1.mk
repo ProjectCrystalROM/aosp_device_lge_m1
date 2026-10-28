@@ -1,3 +1,5 @@
+# Match AOSP fonts.xml references, including its extended fallback families.
+EXTENDED_FONT_FOOTPRINT := true
 # Independent AOSP API22 product; root integration is intentionally not selected.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 # Cellular services and messaging, without the voice Dialer application.
