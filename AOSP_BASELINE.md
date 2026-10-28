@@ -25,7 +25,13 @@ audit/aosp511/source-kernel/validation.json. Resolved packages include
 GmsCore, Phonesky, GsfProxy, K7Provision, Mms and TeleService, exclude Dialer.
 All 705 resolved copy-file sources exist. Evaluation does not prove every
 module exists, builds or links. Qualcomm CAF providers/policy are not yet
-imported. Binder/GPS/libc/signature-spoof patches are not applied to AOSP yet.
+imported. MicroG signature reporting, permission API entries, Cronet libc compatibility,
+LG Binder exports, XTRA layout and AGPS fallback are now applied on AOSP-only
+branches. MicroG location-provider allowlisting lives in the device overlay.
+Full affected framework/resources/native-library build PASS. Ten extracted-Java
+signature cases, seven 32-bit ASAN AGPS cases, XTRA ABI and actual ARM32 Parcel/
+libc QEMU regression checks PASS. Binder IPC/destruction and hardware/microG
+runtime acceptance remain untested. Evidence: audit/aosp511/compatibility.
 Board-provided RIL library/daemon ownership guards have been applied so full
 Android makefile evaluation can reach the source-kernel target.
 TARGET_PROVIDES_INIT_RC, stock DT and recovery-preservation build hooks still
