@@ -1,8 +1,20 @@
-# Userdebug first-boot log access, before the Android USB service starts.
-on fs
-    setprop persist.sys.usb.config adb
+# Diagnostic builds only: expose the LG adb_only gadget before mount_all.
+# This explicit sequence also works before property-trigger dispatch completes.
+# Keep the descriptor sequence identical to init.m1.usb.rc's adb transition.
+on early-fs
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 1004
+    write /sys/class/android_usb/android0/idProduct 631F
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
+    write /sys/class/android_usb/android0/functions adb
+    write /sys/class/android_usb/android0/enable 1
+    start adbd
     setprop sys.usb.config adb
+    setprop sys.usb.state adb
 
+# Persisted USB preferences may be loaded after the early diagnostic setup.
 on boot
     setprop persist.sys.usb.config adb
     setprop sys.usb.config adb

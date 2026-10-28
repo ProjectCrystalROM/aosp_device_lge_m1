@@ -59,3 +59,13 @@ These are diagnostic settings pending device testing, not production acceptance.
 Evidence, exact validation scope and local commits:
 audit/aosp511/caf-integration/README.md and validation.json.
 No recovery image or flashable AOSP ZIP has been produced by this stage.
+
+Init/USB integration (2026-10-28): init.rc is generated from current AOSP core
+init with reviewed device groups, device-owned USB selection and no recovery
+replacement service. All active ramdisk imports and AOSP classpaths are built;
+vold receives device post-fs-data completion. qcom_diag resolves to GID 3009.
+LG simplified IDs are retained for MTP/PTP (+ADB); early diagnostic ADB uses
+LG adb_only 1004:631F before mount_all. Generic and legacy modem/diag USB scripts
+are not active imports. Build, account/import checks, 144 offline USB transitions
+and ARM-native group/compat tests pass. Device/host acceptance remains pending.
+See audit/aosp511/init-usb. SELinux policy and OTA/DT packaging remain gates.

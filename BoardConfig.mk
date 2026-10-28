@@ -30,7 +30,8 @@ BOARD_LIGHTS_VARIANT := qpnp
 BOARD_NEEDS_LGE_RIL_SYMBOLS := true
 BOARD_GPS_XTRA_THREE_CALLBACKS := true
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-# These two compatibility hooks require the later AOSP build-system port.
+# Device AndroidBoard.mk generates init from current AOSP core init.
+# Recovery-preserving OTA packaging remains a separate build-system gate.
 TARGET_PROVIDES_INIT_RC := true
 TARGET_PRESERVE_INSTALLED_RECOVERY := true
 

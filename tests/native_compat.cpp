@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <grp.h>
 #include <hardware/hwcomposer.h>
 #include <system/audio.h>
 #include <stddef.h>
@@ -54,6 +55,13 @@ int main() {
     assert(audio_bytes_per_sample(AUDIO_FORMAT_PCM_16_BIT_OFFLOAD) == 2);
     assert(audio_bytes_per_sample(AUDIO_FORMAT_PCM_24_BIT_OFFLOAD) == 4);
     puts("PASS: actual ARM32 Qualcomm HWC/audio layouts and offload format dispatch");
+#endif
+#ifdef QCOM_HARDWARE
+    const struct group* diag_group = getgrnam("qcom_diag");
+    assert(diag_group != NULL && diag_group->gr_gid == 3009);
+    diag_group = getgrgid(3009);
+    assert(diag_group != NULL && strcmp(diag_group->gr_name, "qcom_diag") == 0);
+    puts("PASS: Qualcomm diagnostic group resolves to qualified GID 3009");
 #endif
     // These call the actual LG ABI exports in the freshly linked libbinder.
     android::Parcel parcel;

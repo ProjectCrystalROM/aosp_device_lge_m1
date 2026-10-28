@@ -25,10 +25,18 @@ k7-cm12-config:
 	@printf '%s\n' $(sort $(product_MODULES)) > $(PRODUCT_OUT)/k7-product-packages.txt
 	@printf '%s\n' $(sort $(filter-out $(ALL_MODULES),$(product_MODULES))) > $(PRODUCT_OUT)/k7-missing-packages.txt
 
-# Own init.rc as a real module, preserving CM12's platform boot graph.
+# Own init.rc as a real module. AOSP generation retains upstream init fixes.
 include $(CLEAR_VARS)
 LOCAL_MODULE := init.rc
-LOCAL_SRC_FILES := ril/init.m1.core.rc
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
+ifeq ($(TARGET_PRODUCT),aosp_m1)
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): system/core/rootdir/init.rc device/lge/m1/aosp/generate-init.py
+	@echo "Generate MS330 AOSP init: $@"
+	@mkdir -p $(dir $@)
+	$(hide) python device/lge/m1/aosp/generate-init.py $< $@
+else
+LOCAL_SRC_FILES := ril/init.m1.core.rc
 include $(BUILD_PREBUILT)
+endif
