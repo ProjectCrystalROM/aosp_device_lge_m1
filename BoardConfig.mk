@@ -36,3 +36,6 @@ TARGET_PROVIDES_INIT_RC := true
 TARGET_PRESERVE_INSTALLED_RECOVERY := true
 
 include device/lge/m1/caf.mk
+
+# Qualified Qualcomm vendor policy, compiled against AOSP's platform policy.
+include device/qcom/sepolicy/sepolicy.mk
