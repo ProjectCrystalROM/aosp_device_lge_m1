@@ -6,22 +6,33 @@ Device geometry, stock firmware selection, no-dialer cellular/SMS profile,
 original-signed microG APKs and K7Provision are inherited from the qualified
 CM12.1 integration, with AOSP product composition and explicit APN selection.
 
-Board uses accepted kernel snapshot at prebuilt/zImage (ignored binary).
-Snapshot extracted from cleanup-fixed signed test boot: source afe9f369edee,
-merged kernel baseline 25012611. Exact SHA256/source in workspace
- audit/aosp511/product-bootstrap/prebuilt-kernel.json.
-Matching modules/DT/boot packaging must be integrated in the boot milestone;
-this bootstrap is NOT a flashable image or a completed hardware port.
+Kernel is built from source at kernel/lge/m1 using
+m1_mpcs_us-perf_defconfig and AOSP's ARM GCC4.8 toolchain. The independent
+source checkout starts at accepted cm-12.1 merge 25012611 (same source tree
+as hardware-tested afe9f369); source changes are handled by Kbuild on each
+invocation. No kernel binary fallback is configured. kernel.mk compiles zImage
+and all 17 matching modules into PRODUCT_OUT/obj/KERNEL_OBJ, installs kernel
+at PRODUCT_OUT/kernel and modules at system/lib/modules, and registers the
+modules in the system image dependency graph. Use `make -j8 kernel` after lunch.
+Stock DT, init and recovery-preserving OTA integration remain later milestones;
+this product is NOT yet a flashable image or completed hardware port.
 
-Trusty Java7 product selection and dumpvars PASS. Resolved packages include
+Trusty Java7 product selection and dumpvars PASS. Integrated `make -j8 kernel`
+PASS (2m10s), generating 3.10.108-g2501261 and 17 modules. All installed files
+match generated outputs; vermagic/imported CRC checks PASS; enabled config
+options identical to accepted hardware configuration. Evidence: workspace
+audit/aosp511/source-kernel/validation.json. Resolved packages include
 GmsCore, Phonesky, GsfProxy, K7Provision, Mms and TeleService, exclude Dialer.
 All 705 resolved copy-file sources exist. Evaluation does not prove every
 module exists, builds or links. Qualcomm CAF providers/policy are not yet
 imported. Binder/GPS/libc/signature-spoof patches are not applied to AOSP yet.
+Board-provided RIL library/daemon ownership guards have been applied so full
+Android makefile evaluation can reach the source-kernel target.
 TARGET_PROVIDES_INIT_RC, stock DT and recovery-preservation build hooks still
 need AOSP implementation. Preserve TWRP; no ROM should be flashed at this stage.
 Root functionality/integration is outside this milestone's scope.
 
 Local independent repos: device/lge/m1, device/lge/m1-common,
-device/lge/msm8909-common and vendor/lge/m1; aosp-5.1.1-ms330 branches.
+device/lge/msm8909-common, vendor/lge/m1 and kernel/lge/m1;
+aosp-5.1.1-ms330 branches.
 These are currently local additions, not published AOSP manifest projects.
