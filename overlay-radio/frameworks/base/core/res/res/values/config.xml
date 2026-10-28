@@ -2,4 +2,8 @@
 <resources>
     <!-- The LG K7 has no physical navigation keys. -->
     <bool name="config_showNavigationBar">true</bool>
+    <string-array name="config_locationProviderPackageNames" translatable="false">
+        <item>com.android.location.fused</item>
+        <item>com.google.android.gms</item>
+    </string-array>
 </resources>
