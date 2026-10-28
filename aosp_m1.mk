@@ -1,7 +1,7 @@
 # Independent AOSP API22 product; root integration is intentionally not selected.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 # Cellular services and messaging, without the voice Dialer application.
-PRODUCT_PACKAGES += InCallUI Mms rild Stk CellBroadcastReceiver
+PRODUCT_PACKAGES += Mms rild Stk CellBroadcastReceiver
 PRODUCT_PROPERTY_OVERRIDES += keyguard.no_require_sim=true
 PRODUCT_CHARACTERISTICS := default
 PRODUCT_PACKAGE_OVERLAYS += device/lge/m1/overlay-tablet

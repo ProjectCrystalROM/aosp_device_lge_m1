@@ -1,71 +1,55 @@
-# AOSP MS330 product bootstrap
+# AOSP MS330 first hardware baseline
 
-Select: lunch aosp_m1-userdebug (AOSP 5.1.1_r38/API22).
-Independent source tree; original CM device/vendor/kernel sources unchanged.
-Device geometry, stock firmware selection, no-dialer cellular/SMS profile,
-original-signed microG APKs and K7Provision are inherited from the qualified
-CM12.1 integration, with AOSP product composition and explicit APN selection.
+Select `lunch aosp_m1-userdebug` in the independent AOSP android-5.1.1_r38 tree.
+A full system/boot/target-files/OTA build now passes in Trusty with Java7.
+Signed deliverables: checkpoints/aosp511/20261028-first-baseline in the workspace.
+No phone was accessed. This is not hardware acceptance: RIL/data failure is an
+owner-accepted known issue while the remaining hardware is established.
 
-Kernel is built from source at kernel/lge/m1 using
-m1_mpcs_us-perf_defconfig and AOSP's ARM GCC4.8 toolchain. The independent
-source checkout starts at accepted cm-12.1 merge 25012611 (same source tree
-as hardware-tested afe9f369); source changes are handled by Kbuild on each
-invocation. No kernel binary fallback is configured. kernel.mk compiles zImage
-and all 17 matching modules into PRODUCT_OUT/obj/KERNEL_OBJ, installs kernel
-at PRODUCT_OUT/kernel and modules at system/lib/modules, and registers the
-modules in the system image dependency graph. Use `make -j8 kernel` after lunch.
-Stock DT, init and recovery-preserving OTA integration remain later milestones;
-this product is NOT yet a flashable image or completed hardware port.
+Kernel is source-built from kernel/lge/m1 at accepted 25012611, Linux3.10.108,
+using m1_mpcs_us-perf_defconfig and AOSP ARM GCC4.8. No kernel binary fallback.
+All 17 modules match source outputs and pass vermagic/imported-CRC validation.
+The archived stock DT is explicitly packaged in boot images and target-files.
 
-Trusty Java7 product selection and dumpvars PASS. Integrated `make -j8 kernel`
-PASS (2m10s), generating 3.10.108-g2501261 and 17 modules. All installed files
-match generated outputs; vermagic/imported CRC checks PASS; enabled config
-options identical to accepted hardware configuration. Evidence: workspace
-audit/aosp511/source-kernel/validation.json. Resolved packages include
-GmsCore, Phonesky, GsfProxy, K7Provision, Mms and TeleService, exclude Dialer.
-All 705 resolved copy-file sources exist. Evaluation does not prove every
-module exists, builds or links. Qualcomm CAF audio/display/media providers are now imported locally; the
-focused HAL, SurfaceFlinger and media-service build is validated as described
-below. Qualcomm policy integration remains pending. MicroG signature reporting, permission API entries, Cronet libc compatibility,
-LG Binder exports, XTRA layout and AGPS fallback are now applied on AOSP-only
-branches. MicroG location-provider allowlisting lives in the device overlay.
-Full affected framework/resources/native-library build PASS. Ten extracted-Java
-signature cases, seven 32-bit ASAN AGPS cases, XTRA ABI and actual ARM32 Parcel/
-libc QEMU regression checks PASS. Binder IPC/destruction and hardware/microG
-runtime acceptance remain untested. Evidence: audit/aosp511/compatibility.
-Board-provided RIL library/daemon ownership guards have been applied so full
-Android makefile evaluation can reach the source-kernel target.
-TARGET_PROVIDES_INIT_RC, stock DT and recovery-preservation build hooks still
-need AOSP implementation. Preserve TWRP; no ROM should be flashed at this stage.
-Root functionality/integration is outside this milestone's scope.
+CAF msm8916 display/audio/media sources are selected for MSM8909. Focused
+Qualcomm HWC/audio interfaces, BLIT/fence/damage handling and compiler flags
+are carried without replacing generic AOSP framework code with CM. Both ARM
+header sets match and native compatibility tests pass. Optional CM-only EGL
+GPU performance hints/BFQ priority calls are omitted. QPNP lights are built
+from source. Evidence: audit/aosp511/caf-integration.
 
-Local independent repos: device/lge/m1, device/lge/m1-common,
-device/lge/msm8909-common, vendor/lge/m1 and kernel/lge/m1;
-aosp-5.1.1-ms330 branches.
-These are currently local additions, not published AOSP manifest projects.
+MicroG signature spoofing, requested-permission API22 behavior, libc exports,
+LG Binder readuInt64, XTRA callback layout and AGPS fallback are applied.
+Original-signed GmsCore/Phonesky/GsfProxy plus separate ARM JNI are retained;
+release signing preserves their certificates/payloads. No-dialer profile,
+K7Provision, original ROM WebView and nxtgenphone APN selection remain.
+Source helpers for WCNSS, CNE, BSON and curl are retained from qualified CM
+repositories; legacy AudioParameter and shared XML providers use AOSP source.
+The stock Bluetooth helper receives the selected persistent controller address.
 
-CAF integration (2026-10-28): tested CM12.1 msm8916 audio/display/media source
-repositories are selected for MSM8909 via caf.mk. QPNP lights remain source-built.
-Focused AOSP HWC/SurfaceFlinger and audio header adaptations preserve matching
-Qualcomm interface layouts. Board ABI compiler flags apply after toolchain
-initialization for GCC and Clang. Optional CM-only BFQ priority and EGL GPU
-performance hints are omitted; ordinary display priority/composition remain.
-The kernel exports its own headers before concurrent HAL/kernel compilation.
+Init is generated from current AOSP core init with reviewed device adaptations,
+no CM init dependency, correct radio/media groups and no recovery-replacement
+service. qcom_diag is GID3009. Ueventd honors the platform device base and creates
+bootdevice aliases for the correct controller, including SELinux best-match
+paths. Lollipop storage, mounts, classpaths and vold completion are retained.
+Qualcomm vendor policy compiles against unchanged AOSP platform policy and
+passes context checks; no new vendor permissive domains were added.
+Evidence: audit/aosp511/init-usb and audit/aosp511/policy.
 
-Eng/userdebug use boot-time ADB without authentication and SELinux permissive
-for first-boot logging, with SELinux still enabled and standard ro.secure=1.
-User builds retain enforcing command line and authenticated ADB configuration.
-These are diagnostic settings pending device testing, not production acceptance.
-Evidence, exact validation scope and local commits:
-audit/aosp511/caf-integration/README.md and validation.json.
-No recovery image or flashable AOSP ZIP has been produced by this stage.
+Eng/userdebug expose diagnostic ADB before mount_all, without authentication,
+with SELinux still enabled/permissive and standard ro.secure=1. User selection
+retains enforcing/authenticated configuration. LG simplified device-mode USB
+IDs are retained: MTP631C, MTP+ADB61F9, PTP631E, PTP+ADB631D, adb_only631F,
+all VID1004 and class0/0/0. Generic/legacy composite USB scripts are not imported.
+Actual host enumeration and runtime acceptance remain pending.
 
-Init/USB integration (2026-10-28): init.rc is generated from current AOSP core
-init with reviewed device groups, device-owned USB selection and no recovery
-replacement service. All active ramdisk imports and AOSP classpaths are built;
-vold receives device post-fs-data completion. qcom_diag resolves to GID 3009.
-LG simplified IDs are retained for MTP/PTP (+ADB); early diagnostic ADB uses
-LG adb_only 1004:631F before mount_all. Generic and legacy modem/diag USB scripts
-are not active imports. Build, account/import checks, 144 offline USB transitions
-and ARM-native group/compat tests pass. Device/host acceptance remains pending.
-See audit/aosp511/init-usb. SELinux policy and OTA/DT packaging remain gates.
+The OTA preserves TWRP: no recovery image/write/restoration payload and no
+requested data format. Two-step recovery-replacing OTAs are rejected. Existing
+Peridot signing identities are reused. CM-to-AOSP userdata/dirty-flash behavior
+is not qualified. Packaging may generate an internal recovery for metadata;
+it is not the intended or delivered recovery. Root integration is excluded.
+Evidence: audit/aosp511/packaging; that directory records local commits,
+artifact checksums and validation scope. AOSP branches/additional repositories
+are local and have not been published in a remote AOSP manifest. Original CM12,
+CM13 and custom-kernel trees remain unchanged. No new SPL is claimed; this
+baseline retains r38's 2016-07-05 source declaration.
