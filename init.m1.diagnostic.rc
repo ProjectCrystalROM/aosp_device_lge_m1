@@ -1,0 +1,8 @@
+# Userdebug first-boot log access, before the Android USB service starts.
+on fs
+    setprop persist.sys.usb.config adb
+    setprop sys.usb.config adb
+
+on boot
+    setprop persist.sys.usb.config adb
+    setprop sys.usb.config adb

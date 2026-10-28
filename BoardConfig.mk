@@ -14,7 +14,12 @@ TARGET_KERNEL_ARCH := arm
 USE_CAMERA_STUB := false
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_FSTAB := device/lge/m1/recovery.fstab
+# First-boot diagnostics retain SELinux policy loading and AVC logging.
+ifneq ($(filter eng userdebug,$(TARGET_BUILD_VARIANT)),)
+BOARD_KERNEL_CMDLINE += security=selinux enforcing=0 androidboot.selinux=permissive
+else
 BOARD_KERNEL_CMDLINE += security=selinux enforcing=1 androidboot.selinux=enforcing
+endif
 include device/lge/m1-common/ril/BoardConfigRadio.mk
 include device/lge/m1-common/BoardConfigWireless.mk
 include device/lge/msm8909-common/board/qcom-audio.mk
@@ -28,3 +33,5 @@ TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 # These two compatibility hooks require the later AOSP build-system port.
 TARGET_PROVIDES_INIT_RC := true
 TARGET_PRESERVE_INSTALLED_RECOVERY := true
+
+include device/lge/m1/caf.mk

@@ -2,6 +2,9 @@
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <hardware/hwcomposer.h>
+#include <system/audio.h>
+#include <stddef.h>
 #include <pthread.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -28,6 +31,30 @@ static void public_prepare() { calls[call_count++] = 'c'; }
 static void public_parent() { calls[call_count++] = 'C'; }
 
 int main() {
+#ifdef QCOM_BSP
+    // Pin the qualified CAF ABI on the actual ARM target, not just a host ABI.
+    assert(sizeof(hwc_layer_1_t) == 112);
+    assert(offsetof(hwc_layer_1_t, dirtyRect) == 64);
+    assert(offsetof(hwc_layer_1_t, acquireFenceFd) == 80);
+    assert(offsetof(hwc_layer_1_t, releaseFenceFd) == 84);
+    assert(sizeof(audio_offload_info_t) == 40);
+    assert(offsetof(audio_offload_info_t, bit_width) == 34);
+    assert(offsetof(audio_offload_info_t, use_small_bufs) == 36);
+    assert(sizeof(audio_config_t) == 64);
+    assert(offsetof(audio_config_t, offload_info) == 16);
+    assert(offsetof(audio_config_t, frame_count) == 56);
+    assert(AUDIO_DEVICE_OUT_PROXY == 0x2000000);
+    assert(AUDIO_OUTPUT_FLAG_VOIP_RX == 0x1000);
+    assert(audio_is_offload_pcm(AUDIO_FORMAT_PCM_24_BIT_OFFLOAD));
+    assert(!audio_is_offload_pcm(AUDIO_FORMAT_PCM_16_BIT));
+    assert(audio_is_valid_format(AUDIO_FORMAT_PCM_16_BIT_OFFLOAD));
+    assert(audio_is_valid_format(AUDIO_FORMAT_PCM_24_BIT_OFFLOAD));
+    assert(!audio_is_valid_format(AUDIO_FORMAT_PCM_OFFLOAD));
+    assert(audio_is_valid_format(AUDIO_FORMAT_EVRC));
+    assert(audio_bytes_per_sample(AUDIO_FORMAT_PCM_16_BIT_OFFLOAD) == 2);
+    assert(audio_bytes_per_sample(AUDIO_FORMAT_PCM_24_BIT_OFFLOAD) == 4);
+    puts("PASS: actual ARM32 Qualcomm HWC/audio layouts and offload format dispatch");
+#endif
     // These call the actual LG ABI exports in the freshly linked libbinder.
     android::Parcel parcel;
     const uint64_t expected = UINT64_C(0xfedcba9876543210);

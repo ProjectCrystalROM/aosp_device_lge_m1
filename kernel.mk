@@ -28,7 +28,7 @@ $(M1_KERNEL_CONFIG): $(TARGET_KERNEL_SOURCE)/arch/arm/configs/$(TARGET_KERNEL_CO
 # Re-enter Kbuild on each invocation so edits, removed objects and Git release
 # identifiers are noticed. Kbuild handles incremental compilation internally.
 .PHONY: m1-kernel-check
-$(M1_KERNEL_STAMP): m1-kernel-check $(M1_KERNEL_CONFIG)
+$(M1_KERNEL_STAMP): m1-kernel-check $(M1_KERNEL_CONFIG) $(M1_KERNEL_OUT)/usr
 	+$(M1_KERNEL_MAKE) zImage modules
 	@touch $@
 
@@ -52,3 +52,7 @@ ALL_DEFAULT_INSTALLED_MODULES += $(M1_KERNEL_INSTALLED_MODULES)
 
 .PHONY: kernel
 kernel: $(PRODUCT_OUT)/kernel $(M1_KERNEL_INSTALLED_MODULES)
+
+.PHONY: m1-kernel-headers-check
+$(M1_KERNEL_OUT)/usr: m1-kernel-headers-check $(M1_KERNEL_CONFIG)
+	+$(M1_KERNEL_MAKE) headers_install

@@ -24,8 +24,9 @@ options identical to accepted hardware configuration. Evidence: workspace
 audit/aosp511/source-kernel/validation.json. Resolved packages include
 GmsCore, Phonesky, GsfProxy, K7Provision, Mms and TeleService, exclude Dialer.
 All 705 resolved copy-file sources exist. Evaluation does not prove every
-module exists, builds or links. Qualcomm CAF providers/policy are not yet
-imported. MicroG signature reporting, permission API entries, Cronet libc compatibility,
+module exists, builds or links. Qualcomm CAF audio/display/media providers are now imported locally; the
+focused HAL, SurfaceFlinger and media-service build is validated as described
+below. Qualcomm policy integration remains pending. MicroG signature reporting, permission API entries, Cronet libc compatibility,
 LG Binder exports, XTRA layout and AGPS fallback are now applied on AOSP-only
 branches. MicroG location-provider allowlisting lives in the device overlay.
 Full affected framework/resources/native-library build PASS. Ten extracted-Java
@@ -42,3 +43,19 @@ Local independent repos: device/lge/m1, device/lge/m1-common,
 device/lge/msm8909-common, vendor/lge/m1 and kernel/lge/m1;
 aosp-5.1.1-ms330 branches.
 These are currently local additions, not published AOSP manifest projects.
+
+CAF integration (2026-10-28): tested CM12.1 msm8916 audio/display/media source
+repositories are selected for MSM8909 via caf.mk. QPNP lights remain source-built.
+Focused AOSP HWC/SurfaceFlinger and audio header adaptations preserve matching
+Qualcomm interface layouts. Board ABI compiler flags apply after toolchain
+initialization for GCC and Clang. Optional CM-only BFQ priority and EGL GPU
+performance hints are omitted; ordinary display priority/composition remain.
+The kernel exports its own headers before concurrent HAL/kernel compilation.
+
+Eng/userdebug use boot-time ADB without authentication and SELinux permissive
+for first-boot logging, with SELinux still enabled and standard ro.secure=1.
+User builds retain enforcing command line and authenticated ADB configuration.
+These are diagnostic settings pending device testing, not production acceptance.
+Evidence, exact validation scope and local commits:
+audit/aosp511/caf-integration/README.md and validation.json.
+No recovery image or flashable AOSP ZIP has been produced by this stage.
