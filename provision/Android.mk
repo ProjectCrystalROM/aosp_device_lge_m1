@@ -1,6 +1,6 @@
 # Existing AOSP no-screen first-boot provisioning for this K7 product only.
 LOCAL_PATH := $(call my-dir)
-ifneq ($(filter cm_m1 cm_m1_radio cm_m1_radio_noselinux,$(TARGET_PRODUCT)),)
+ifneq ($(filter aosp_m1 cm_m1 cm_m1_radio cm_m1_radio_noselinux,$(TARGET_PRODUCT)),)
 ifeq ($(TARGET_DEVICE),m1)
 include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := optional

@@ -1,1 +1,1 @@
-add_lunch_combo cm_m1-userdebug
+add_lunch_combo aosp_m1-userdebug
