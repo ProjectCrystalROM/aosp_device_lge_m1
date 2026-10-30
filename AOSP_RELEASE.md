@@ -35,8 +35,8 @@ Hardware regression passed on M95/messaging, user/permissive and user/enforcing
 stages: Wi-Fi, Bluetooth, cellular data and applicable reboot persistence, camera
 photo/video and audio input/output. Browser reports active WebView95. Incoming SMS
 accepted for verification codes. CrystalGram release install/login/chat/colors/
-strings and real push delivery through microG confirmed. Final diagnostic-USB-removal
-image still needs its own boot/USB acceptance; do not conflate prior stage results.
+strings and real push delivery through microG confirmed. Final branded user-release image hardware validation passed, explicitly including
+MTP transfer. ADB host authorization was not separately reported as a runtime test.
 
 Project Crystal still boot artwork is generated into bootanimation.zip at build
 time from the supplied PNG, using a480x854 canvas to avoid the old logo clipping.

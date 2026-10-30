@@ -42,7 +42,8 @@ Owner regression checks passed Wi-Fi, Bluetooth, cellular data, applicable reboo
 persistence, camera photo/video and audio input/output. Browser confirms WebView95;
 manual incoming SMS is accepted for verification-code use. CrystalGram release
 login/chat/push and appearance were confirmed. User/permissive and user/enforcing
-stages passed hardware validation; final USB/artwork image acceptance is separate.
+stages passed hardware validation. The final branded user-release image passed
+owner hardware validation, explicitly including MTP file transfer.
 
 SIM changes require reboot. CSIM and voice/VoLTE remain outside this profile; USB
 OTG and other device variants are not qualified. No later complete ASB coverage is
