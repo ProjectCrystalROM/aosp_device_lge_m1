@@ -74,3 +74,7 @@ PRODUCT_PACKAGES += GmsCore Phonesky
 PRODUCT_PACKAGES += GsfProxy
 
 PRODUCT_COPY_FILES += device/lge/m1/apns-conf.xml:system/etc/apns-conf.xml
+
+# Project Crystal artwork and fully populated receive-only messenger dock.
+PRODUCT_PACKAGE_OVERLAYS += device/lge/m1/overlay-crystal
+PRODUCT_PACKAGES += bootanimation.zip

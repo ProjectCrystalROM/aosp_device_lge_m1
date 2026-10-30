@@ -38,8 +38,12 @@ accepted for verification codes. CrystalGram release install/login/chat/colors/
 strings and real push delivery through microG confirmed. Final diagnostic-USB-removal
 image still needs its own boot/USB acceptance; do not conflate prior stage results.
 
-Stock Android fallback boot logo is 512px wide on a 480px screen and clips at the
-sides. Custom bootanimation.zip can replace it; no artwork selected yet.
+Project Crystal still boot artwork is generated into bootanimation.zip at build
+time from the supplied PNG, using a480x854 canvas to avoid the old logo clipping.
+The supplied JPEG replaces the default phone wallpaper through a resource overlay.
+Launcher2 defaults to CrystalGram, Contacts, All apps, Camera and Browser in the
+dock. These defaults apply to newly initialized launcher/wallpaper state; existing
+user layouts and chosen wallpapers are preserved.
 
 ## Build prerequisites
 
