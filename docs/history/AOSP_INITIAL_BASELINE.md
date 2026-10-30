@@ -1,7 +1,7 @@
 # Historical first-baseline notes
 
 These notes describe the initial bringup, not the current release. See
-[AOSP_RELEASE.md](AOSP_RELEASE.md) for the maintained state.
+[AOSP_RELEASE.md](../../AOSP_RELEASE.md) for the maintained state.
 
 # AOSP MS330 first hardware baseline
 
