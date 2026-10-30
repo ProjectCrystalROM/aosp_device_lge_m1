@@ -40,3 +40,16 @@ else
 LOCAL_SRC_FILES := ril/init.m1.core.rc
 include $(BUILD_PREBUILT)
 endif
+
+# Only explicit diagnostic stages import the early unauthenticated USB fragment.
+ifeq ($(TARGET_PRODUCT),aosp_m1)
+include $(CLEAR_VARS)
+LOCAL_MODULE := init.m1.rc
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
+include $(BUILD_SYSTEM)/base_rules.mk
+$(LOCAL_BUILT_MODULE): PRIVATE_M1_KEEP_DIAGNOSTIC := $(if $(filter true,$(M1_DIAGNOSTIC_USB)),true,false)
+$(LOCAL_BUILT_MODULE): device/lge/m1-common/rootdir/cm12/init.m1.rc
+	@mkdir -p $(dir $@)
+	$(hide) if [ "$(PRIVATE_M1_KEEP_DIAGNOSTIC)" = true ]; then cp $< $@; else sed '/^import \/init.m1.diagnostic.rc$$/d' $< > $@; fi
+endif

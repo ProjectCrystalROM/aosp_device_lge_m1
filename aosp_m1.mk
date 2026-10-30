@@ -3,7 +3,8 @@ EXTENDED_FONT_FOOTPRINT := true
 # Independent AOSP API22 product; root integration is intentionally not selected.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 # Cellular services and messaging, without the voice Dialer application.
-PRODUCT_PACKAGES += Mms rild Stk CellBroadcastReceiver
+# Receive-only SMS notifications; internet messaging is provided by CrystalGram.
+PRODUCT_PACKAGES += BasicSmsReceiver CrystalGram rild Stk CellBroadcastReceiver
 PRODUCT_PROPERTY_OVERRIDES += keyguard.no_require_sim=true
 PRODUCT_CHARACTERISTICS := default
 PRODUCT_PACKAGE_OVERLAYS += device/lge/m1/overlay-tablet
@@ -32,7 +33,7 @@ PRODUCT_PACKAGES += gralloc.msm8909 hwcomposer.msm8909 copybit.msm8909 memtrack.
 # Source-built backlight control for the K7's QPNP sysfs interface.
 PRODUCT_PACKAGES += lights.msm8909
 
-# Owner-tested standalone WebView; replaces the old webview package.
+# Source-built standalone M95 WebView, installed by the normal ROM graph.
 PRODUCT_PACKAGES += webview
 
 # The three routing files are byte-identical to the archived stock K7 system.

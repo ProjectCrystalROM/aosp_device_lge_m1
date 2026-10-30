@@ -1,0 +1,17 @@
+# Chromium 95 standalone WebView for the ARMv7/API22 MS330.
+target_os = "android"
+target_cpu = "arm"
+is_debug = false
+is_component_build = false
+symbol_level = 0
+android_channel = "stable"
+system_webview_package_name = "com.android.webview"
+use_goma = false
+is_official_build = true
+disable_fieldtrial_testing_config = true
+is_chrome_branded = false
+use_official_google_api_keys = false
+ffmpeg_branding = "Chrome"
+proprietary_codecs = true
+webview_includes_weblayer = false
+chrome_pgo_phase = 0

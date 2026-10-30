@@ -15,7 +15,7 @@ USE_CAMERA_STUB := false
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_FSTAB := device/lge/m1/recovery.fstab
 # First-boot diagnostics retain SELinux policy loading and AVC logging.
-ifneq ($(filter eng userdebug,$(TARGET_BUILD_VARIANT)),)
+ifneq ($(filter eng userdebug,$(TARGET_BUILD_VARIANT))$(filter true,$(M1_SELINUX_PERMISSIVE)),)
 BOARD_KERNEL_CMDLINE += security=selinux enforcing=0 androidboot.selinux=permissive
 else
 BOARD_KERNEL_CMDLINE += security=selinux enforcing=1 androidboot.selinux=enforcing
@@ -39,3 +39,6 @@ include device/lge/m1/caf.mk
 
 # Qualified Qualcomm vendor policy, compiled against AOSP's platform policy.
 include device/qcom/sepolicy/sepolicy.mk
+
+# Build the standalone API21+ WebView through the host GN/Ninja worker.
+M1_SOURCE_WEBVIEW_M95 := true
